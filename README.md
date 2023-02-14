@@ -1,5 +1,5 @@
 # Devious
-*Devious Selfbot 😈*
+*Devious Selfbot v7 😈*
 
 **Warning ⚠️** <br>
 *Selfbots are against Discord's TOS, use at your own risk! Recommended that you run on an alt.*
