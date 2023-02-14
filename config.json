@@ -1,0 +1,13 @@
+{
+  "version": "7.36.71",
+  "token": "TOKEN",
+  "prefix": "!",
+  "uptime": null,
+  "message_processing": null,
+  "command_processing": null,
+  "hidden": true,
+  "blacklisted": [],
+  "mocking": [],
+  "reacting": {},
+  "replying": {}
+}
