@@ -28,9 +28,9 @@ class Automation(commands.Cog):
   async def endmock(self, ctx, member: discord.User=None):
     db = Database().load()
     if member is None:
-      Database().set_key('reacting', {})
-      if len(db["reacting"]) != 1:
-        await ctx.send(f'> Stopped mocking `{len(db["reacting"])}` users')
+      Database().set_key('mocking', {})
+      if len(db["mocking"]) != 1:
+        await ctx.send(f'> Stopped mocking `{len(db["mocking"])}` users')
       else:
         await ctx.send('> Stopped mocking `1` user')
     else:
@@ -102,10 +102,10 @@ class Automation(commands.Cog):
     db = Database().load()
     if member is None:
       Database().set_key('replying', {})
-      if len(db["replying"]) != 1
+      if len(db["replying"]) != 1:
         await ctx.send(f'> Stopped replying to `{len(db["replying"])}` users')
-    else:
-      await ctx.send('> Stopped replying to `1` user')
+      else:
+        await ctx.send('> Stopped replying to `1` user')
     else:
       if str(member.id) in db['replying']:
         del db['replying'][str(member.id)]
