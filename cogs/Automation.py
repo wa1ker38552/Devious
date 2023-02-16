@@ -28,7 +28,7 @@ class Automation(commands.Cog):
   async def endmock(self, ctx, member: discord.User=None):
     db = Database().load()
     if member is None:
-      Database().set_key('mocking', {})
+      Database().set_key('mocking', [])
       if len(db["mocking"]) != 1:
         await ctx.send(f'> Stopped mocking `{len(db["mocking"])}` users')
       else:
