@@ -1,10 +1,13 @@
 from discord.ext import commands
 from database import Database
 from main import reload_cogs
+from PIL import Image
 from colors import *
+import requests
 import discord
 import asyncio
 import time
+import PIL
 import os
 
 class Utility(commands.Cog):
@@ -141,6 +144,28 @@ class Utility(commands.Cog):
         await ctx.send(f'> `{key}`: `{str(db[key])}`')
       else:
         await ctx.send(f'> `{key}` is not a config')
+
+  @commands.command()
+  async def emoji(self, ctx, emoji, name):
+    try:
+      ctx.guild.id
+      try:
+        emoji = emoji.split(':')[2][:-1]
+
+        request = requests.get(f'https://cdn.discordapp.com/emojis/{emoji}.png?size=96&quality=lossless')
+        with open(f'assets/emojis/{name}.png', 'wb') as file:
+          file.write(request.content)
+
+        try:
+          Image.open(f'assets/emojis/{name}.png').resize((30, 30)).save(f'assets/emojis/{name}.png')
+          await ctx.send(f'> Succesfully copied over emoji to `{name}` from `{ctx.guild.name}`')
+        except PIL.UnidentifiedImageError:
+          os.remove(f'assets/emojis/{name}.png')
+          await ctx.send(f'> Invalid emoji `{emoji}`')
+      except IndexError:
+        await ctx.send(f'> Invalid emoji `{emoji}`')
+    except AttributeError:
+      await ctx.send(f'> Try `{Database().load()["prefix"]}emoji {emoji} {name}` on a guild')
 
 def setup(client):
   client.add_cog(Utility(client))
